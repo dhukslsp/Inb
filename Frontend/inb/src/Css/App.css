@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* adding the contents for the .navbar */
+/* .navbar{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #45432f;
+    height: 4pc;
+    flex-wrap: wrap;
+}
+.navbar>div{
+    display: inline;
+    color: aliceblue;
+    padding: 1pc;
+    font-weight: bolder;
+    border-radius: 1pc;
+}
+.navbar>div:hover{
+    transition: 1s;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+}
+#loginbutton{
+    
+} */
