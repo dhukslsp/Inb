@@ -2,12 +2,30 @@ import React, { useContext, useState } from 'react'
 import notecontext from '../Context/notes/noteContext';
 import AlertComponent from './AlertComponent';
 function AddA() {
-    const contex = useContext(notecontext);
-    const { addnote } = contex;
     const [note,setNote] = useState({title : "", description: "",tag: ""});
-    const handleclick = () => {
-        addnote(note.title,note.descriptio,note.tag)
-    }
+    const addnote = async (title, description, tag) => {
+        // this will update entries with PUT
+        const url = `http://localhost:3012/api/notes/addnote`
+        const response = await fetch(url, {
+          method: "post",
+          mode:'cors',
+          body: JSON.stringify({
+            "title": "This is the new note",
+            "description": "This is my descriptiond asda asdasdsas",
+            "tag": "My main tag"
+        }),
+          headers: {
+            'contentType': 'application/json',
+            'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38"
+          }
+        })
+        console.log(JSON.stringify({
+            "title": "This is the new note",
+            "description": "This is my descriptiond asda asdasdsas",
+            "tag": "My main tag"
+        }),)
+        console.log(response)
+      }
     const onchangehandler1 = (e) =>{
         setNote({...note,[e.target.name]:[e.target.value]})
     }
@@ -28,7 +46,7 @@ function AddA() {
                     <label htmFor = 'desc' htmlFor="exampleFormControlTextarea1" className="desc">Example textarea</label>
                     <textarea className="form-control" name = "description" id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3"></textarea>
                 </div>
-                <button onClick={handleclick}>Add Note</button>
+                <button onClick={addnote}>Add Note</button>
             </div>
         </div>
     )
