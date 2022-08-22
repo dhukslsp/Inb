@@ -36,16 +36,6 @@ router.post('/Create_User',
         const jwtData = jwt.sign(data, jutsecret)
         res.json({ jwtData });
     });
-//    const data = await new User({
-//     name: req.body.name,
-//     email: req.body.email,
-//     password: req.body.password
-//    })
-
-//    data.save().then(res.send(req.body)).catch(res.send(error));
-//    res.send(data.json());
-//Authenticate a user no login required
-// This thing authenticate the user with post/API/Auth/Login
 router.post('/Login',
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'The password cannoot be blanck').exists()
