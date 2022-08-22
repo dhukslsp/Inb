@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import notecontext from '../Context/notes/noteContext';
+import React, { useState } from 'react'
 import AlertComponent from './AlertComponent';
 function AddA() {
     const [note,setNote] = useState({title : "", description: "",tag: ""});
@@ -16,6 +15,7 @@ function AddA() {
           }
         })
         console.log(response)
+        alert("You Note Has been added plase refresh the page to see you note");
       }
     const onchangehandler1 = (e) =>{
         setNote({...note,[e.target.name]:[e.target.value]})
