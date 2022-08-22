@@ -1,15 +1,15 @@
 // Index is the main route of the file
 const express = require('express');
-const cors = require("cors");
 const connectToMongo = require("./db");
+const cors = require("cors");
 connectToMongo();
 const app = express()
 const port = 3012
 //available eutes
 
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 app.get('/', (req, res) => {
   res.send('Hello World!')
   
