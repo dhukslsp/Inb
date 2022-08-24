@@ -4,8 +4,9 @@ function NoteState(props) {
   const host = "http://localhost:3012"
   const notestate = []
   const [mynote, setnotes] = useState(notestate);
-  //Get all notes
-  //Add note
+
+  
+  //  get All Notes
   const fetchallnotes = async () => {
     const response = await fetch(`${host}/api/notes/Fetchallnotes`, {
       method: 'GET',
