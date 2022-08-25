@@ -3,33 +3,33 @@ import notecontext from '../Context/notes/noteContext'
 import NoteCard from './NoteCard';
 import AddA from './AddA';
 export default function Home() {
-  const [note, setNote] = useState({id:"", title: "", description: "", tag: "" });
+  const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" });
   //Onchanging of the update note textbox
   const onchangehandler1 = (e) => {
     setNote({ ...note, [e.target.name]: [e.target.value] })
   }
   const first = useContext(notecontext)
-  const { fetchallnotes, mynote ,setnotes} = first; //Fetchig data from usecontext
+  const { fetchallnotes, mynote, setnotes } = first; //Fetchig data from usecontext
   const updateNote = (id, title, description, tag) => {
-    setNote({id: id, title: title, description: description, tag: tag })
+    setNote({ id: id, title: title, description: description, tag: tag })
     console.log(note.id)
     ref.current.click()
   }
   const editnote = async (id, title, description, tag) => {
     console.log(title);
-    const url = 'http://localhost:3012/api/notes/updatenote/' +id;
+    const url = 'http://localhost:3012/api/notes/updatenote/' + id;
     const response = await fetch(url, {
       method: 'put',
-      mode:'cors',
-      body: JSON.stringify({title:title,description:description,tag:tag}),
+      mode: 'cors',
+      body: JSON.stringify({ title: title, description: description, tag: tag }),
       headers: {
         'content-Type': 'application/json',
         'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38",
       }
     })
     console.log(response);
-  }  
-  const executingEditNote = ()=>{
+  }
+  const executingEditNote = () => {
 
   }
   //Function for saving teh changes in the library
@@ -39,7 +39,7 @@ export default function Home() {
   useEffect(() => {
     fetchallnotes();
   })
-  
+
   return (
     <div>
       <AddA />
@@ -59,7 +59,7 @@ export default function Home() {
                 <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Create a New Note</p>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Title</label>
-                  <input type="text" name="title" className="form-control" ref = {clickref} value={note.title} onChange={onchangehandler1} id="title" />
+                  <input type="text" name="title" className="form-control" ref={clickref} value={note.title} onChange={onchangehandler1} id="title" />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Tag</label>
@@ -72,9 +72,18 @@ export default function Home() {
               </div>
             </div>
             <div className="modal-footer">
-              <button ref = {closeRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button onClick={()=>{
-                editnote(note.id,note.title[0],note.description[0],note.tag[0])
+              <button ref={closeRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button onClick={() => {
+                let title1 = "";
+                let description1 = "";
+                let tag1 = "";
+                if (typeof (note.title) === 'string') { title1 = note.title } else { title1 = note.title[0] } //Makinbg an if statement for the main title
+                if (typeof (note.description) === 'string') {
+                  console.log("runned")
+                  description1 = note.description
+                } else { description1 = note.desc[0] } //Makinbg an if statement for the main title
+                if (typeof (note.tag) === 'string') { tag1 = note.tag } else { tag1 = note.tag[0] } //Makinbg an if statement for the main title
+                editnote(note.id, title1, description1, tag1);
               }
               } type="button" className="btn btn-primary">Save changes</button>
             </div>
