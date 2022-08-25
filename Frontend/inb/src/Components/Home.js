@@ -78,7 +78,7 @@ export default function Home() {
                 if (typeof (note.description) === 'string') {
                   console.log("runned")
                   description1 = note.description
-                } else { description1 = note.desc[0] } //Makinbg an if statement for the main title
+                } else { description1 = note.description[0] } //Makinbg an if statement for the main title
                 if (typeof (note.tag) === 'string') { tag1 = note.tag } else { tag1 = note.tag[0] } //Makinbg an if statement for the main title
                 editnote(note.id, title1, description1, tag1);
               }
