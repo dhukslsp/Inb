@@ -9,7 +9,7 @@ export default function Home() {
     setNote({ ...note, [e.target.name]: [e.target.value] })
   }
   const first = useContext(notecontext)
-  const { fetchallnotes, mynote, setnotes } = first; //Fetchig data from usecontext
+  const { fetchallnotes, mynote } = first; //Fetchig data from usecontext
   const updateNote = (id, title, description, tag) => {
     setNote({ id: id, title: title, description: description, tag: tag })
     console.log(note.id)
@@ -28,9 +28,6 @@ export default function Home() {
       }
     })
     console.log(response);
-  }
-  const executingEditNote = () => {
-
   }
   //Function for saving teh changes in the library
   const ref = useRef();
