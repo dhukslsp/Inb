@@ -15,14 +15,8 @@ router.get('/Fetchallnotes', fetchuser, async (req, res) => {
     }
 })
 // add a new not using post add note
-router.post('/addnote', fetchuser,
-    body("title", "Enter a valid title with min length of 5").isLength({ min: 5 }),
-    body("description", "Enter a valid description of at least 5 characters").isLength({ min: 5 })
-    , async (req, res) => {
+router.post('/addnote', fetchuser,async (req, res) => {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: "please atleast the title of min length of 5 and description of 5" });
-        }
         try {
             const { title, description, tag } = req.body;
             const note = new Note({

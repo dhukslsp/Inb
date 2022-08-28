@@ -27,7 +27,7 @@ export default function Home() {
         'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38",
       }
     })
-    console.log(response);
+    console.log(response.json());
   }
   //Function for saving teh changes in the library
   const ref = useRef();
@@ -56,15 +56,15 @@ export default function Home() {
                 <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Create a New Note</p>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Title</label>
-                  <input type="text" name="title" className="form-control" ref={clickref} value={note.title} onChange={onchangehandler1} id="title" />
+                  <input type="text" name="title" className="form-control" ref={clickref} value={note.title} onChange={onchangehandler1} id="title"/>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Tag</label>
-                  <input type="text" name="tag" className="form-control" value={note.tag} onChange={onchangehandler1} id="tag" />
+                  <input type="text" name="tag" className="form-control" value={note.tag} onChange={onchangehandler1} id="tag"/>
                 </div>
                 <div className="mb-3">
                   <label htmFor='desc' htmlFor="exampleFormControlTextarea1" className="desc">Example textarea</label>
-                  <textarea className="form-control" name="description" value={note.description} id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3"></textarea>
+                  <textarea className="form-control" name="description" value={note.description} id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3"/>
                 </div>
               </div>
             </div>
@@ -89,6 +89,7 @@ export default function Home() {
       </div>
       <div className='p-10' style={{ "paddingTop": "0px" }}>
         <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Your All Notes</p>
+        {mynote.length === 0 && <h2>No Notes to display</h2>}
         {mynote.map((note) => { return <NoteCard update={updateNote} tag={note.tag} id={note._id} title={note.title} key={note._id} mydesc={note.description} /> })}
       </div>
     </div>

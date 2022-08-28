@@ -5,6 +5,8 @@ import Navbar from './Components/Navbar';
 import React from 'react';
 import About from './Components/About';
 import NoteState from './Context/notes/NoteState'
+import Login from './Components/Login'
+import SignUp from './Components/SignUp'
 import { Routes, Route } from "react-router-dom";
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='about' element={<About />} />
+          <Route path='login' element={<Login/>} />
+          <Route path='signup' element={<SignUp/>} />
         </Routes>
       </NoteState>
   );

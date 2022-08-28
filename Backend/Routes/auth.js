@@ -7,20 +7,13 @@ var jwt = require('jsonwebtoken');
 const fetchuser = require("../Middlewere/fetchuser");
 const jutsecret = "Harryisagoodb$dy";
 // create a user using POST api/auth dosent require auth
-router.post('/Create_User',
-    body("name", "Enter a valid name with min length of 5").isLength({ min: 5 }),
-    body("email", "The e mail enterde is not valid").isEmail(),
-    body("password", "The password enterde is invalid").isLength({ min: 5 })
-    , async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+router.post('/Create_User',async (req, res) => {
         // check weather the user with the same e mail exists already
         let user = await User.findOne({ email: req.body.email });
         if (user) {
             res.status(400).json({ error: "Sorry there already exists a user with the same e mail" });
         }
+        else{
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(req.body.password, salt);
         user = await User.create({
@@ -34,7 +27,7 @@ router.post('/Create_User',
             }
         }
         const jwtData = jwt.sign(data, jutsecret)
-        res.json({ jwtData });
+        res.json({ jwtData });}
     });
 //    const data = await new User({
 //     name: req.body.name,
