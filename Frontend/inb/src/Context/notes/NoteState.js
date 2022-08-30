@@ -5,7 +5,7 @@ function NoteState(props) {
   const notestate = []
   const [mynote, setnotes] = useState(notestate);
 
-  var loginJwt = "";
+  var loginJwt = localStorage.getItem("tocken");
   //  get All Notes
   const fetchallnotes = async () => {
     const response = await fetch(`${host}/api/notes/Fetchallnotes`, {

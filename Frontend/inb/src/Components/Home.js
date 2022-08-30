@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import notecontext from '../Context/notes/noteContext'
 import NoteCard from './NoteCard';
 import AddA from './AddA';
+import {useNavigate} from "react-router-dom";
 export default function Home() {
+  let history = useNavigate();
   const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" });
   //Onchanging of the update note textbox
   const onchangehandler1 = (e) => {
@@ -34,7 +36,12 @@ export default function Home() {
   const clickref = useRef();
   const closeRef = useRef();
   useEffect(() => {
-    fetchallnotes();
+    if(localStorage.getItem("tocken")){
+      fetchallnotes();
+    }
+    else{
+      history("/login");
+    }
   })
 
   return (

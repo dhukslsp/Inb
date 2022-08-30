@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import notecontext from '../Context/notes/noteContext'
+import {useNavigate} from "react-router-dom";
 function Login() {
+	var myredirect = useNavigate();
 	const [mystate, changestate] = useState("");
 	const first = useContext(notecontext);
 	var { loginJwt } = first;
@@ -17,7 +19,9 @@ function Login() {
 		if (response.ok) {
 			const newjson = await response.json();
 			loginJwt = newjson.jwtData;
+			localStorage.setItem("tocken",loginJwt);// Settinbg jwt data
 			console.log(loginJwt);
+			myredirect("/");
 		}
 		else {
 			alert("Invalid Credential")
