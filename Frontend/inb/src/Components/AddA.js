@@ -38,7 +38,7 @@ function AddA() {
                     <label htmFor='desc' htmlFor="exampleFormControlTextarea1" className="desc">Example textarea</label>
                     <textarea className="form-control" name="description" id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3"></textarea>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={() => { addnote(note.title[0], note.description[0], note.tag[0]) }}>Add Note</button>
+                <button type="button" className="btn btn-primary" onClick={() => { addnote(note.title[0], note.description[0], note.tag[0]) }}>Add Note</button>
             </div>
         </div>
     )

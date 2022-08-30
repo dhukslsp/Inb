@@ -1,6 +1,6 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Link } from "react-router-dom";
-
+import NoteState from '../Context/notes/NoteState';
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg bg-light font-extrabold">
@@ -16,7 +16,8 @@ function Navbar() {
               </li>
             </ul>
             <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/login">Login</Link></button>
-            <button className="btn btn-outline-success" type="submit"><Link className="nav-link" to="/signup">Sign Up</Link></button>
+            <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/signup">Sign Up</Link></button>
+            <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/signup">Sign Out</Link></button>
           </div>
         </div>
       </nav>
