@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import AlertComponent from './AlertComponent';
 
 function AddA() {
     const [note, setNote] = useState({ title: "", description: "", tag: "" });
@@ -23,7 +22,6 @@ function AddA() {
     }
     return (
         <div>
-            <AlertComponent alertitem={"This is some alert item"} />
             <div className='p-10'>
                 <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Create a New Note</p>
                 <div className="mb-3">

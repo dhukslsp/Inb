@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-
+import React, { useState, useContext } from 'react'
+import notecontext from '../Context/notes/noteContext'
 function Login() {
 	const [mystate, changestate] = useState("");
+	const first = useContext(notecontext);
+	var { loginJwt } = first;
 	const loginrequest = async (Email, password) => {
 		const url = 'http://localhost:3012/api/auth/Login';
 		const response = await fetch(url, {
@@ -12,10 +14,16 @@ function Login() {
 			},
 			body: JSON.stringify({ email: Email, password: password })
 		})
-		console.log(response);
+		if (response.ok) {
+			const newjson = await response.json();
+			loginJwt = newjson.jwtData;
+			console.log(loginJwt);
+		}
+		else {
+			alert("Invalid Credential")
+		}
 	}
 	const onchange1 = (e) => {
-		console.log(mystate);
 		changestate({ ...mystate, [e.target.name]: [e.target.value] })
 	}
 	return (

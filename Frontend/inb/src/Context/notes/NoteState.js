@@ -5,7 +5,7 @@ function NoteState(props) {
   const notestate = []
   const [mynote, setnotes] = useState(notestate);
 
-  
+  var loginJwt = "";
   //  get All Notes
   const fetchallnotes = async () => {
     const response = await fetch(`${host}/api/notes/Fetchallnotes`, {
@@ -38,7 +38,7 @@ function NoteState(props) {
     console.log(response)
   }
   return (
-    <Notecontext.Provider value={{ fetchallnotes, mynote, setnotes, deleteNote }}>
+    <Notecontext.Provider value={{ fetchallnotes, mynote, setnotes, deleteNote,loginJwt }}>
       {props.children}
     </Notecontext.Provider>
   )

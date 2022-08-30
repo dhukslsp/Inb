@@ -2,7 +2,7 @@ import './Css/App.css';
 // import './Components/Navbar'
 import Home from './Components/Home';
 import Navbar from './Components/Navbar';
-import React from 'react';
+import React,{useState} from 'react';
 import About from './Components/About';
 import NoteState from './Context/notes/NoteState'
 import Login from './Components/Login'

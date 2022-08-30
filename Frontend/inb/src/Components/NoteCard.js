@@ -1,4 +1,4 @@
-import React, { Component , useContext} from 'react'
+import React, { useContext} from 'react'
 import notecontext from '../Context/notes/noteContext'
 export default function NoteCard(props) {
     const first = useContext(notecontext)
