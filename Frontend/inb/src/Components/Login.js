@@ -1,11 +1,8 @@
-import React, { useState, useContext } from 'react'
-import notecontext from '../Context/notes/noteContext'
+import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom";
 function Login() {
 	var myredirect = useNavigate();
 	const [mystate, changestate] = useState("");
-	const first = useContext(notecontext);
-	var { loginJwt } = first;
 	const loginrequest = async (Email, password) => {
 		const url = 'http://localhost:3012/api/auth/Login';
 		const response = await fetch(url, {
@@ -18,9 +15,7 @@ function Login() {
 		})
 		if (response.ok) {
 			const newjson = await response.json();
-			loginJwt = newjson.jwtData;
-			localStorage.setItem("tocken",loginJwt);// Settinbg jwt data
-			console.log(loginJwt);
+			localStorage.setItem("tocken",newjson.jwtData);// Settinbg jwt data
 			myredirect("/");
 		}
 		else {

@@ -11,7 +11,7 @@ export default function Home() {
     setNote({ ...note, [e.target.name]: [e.target.value] })
   }
   const first = useContext(notecontext)
-  const { fetchallnotes, mynote } = first; //Fetchig data from usecontext
+  const { fetchallnotes, mynote,loginJwt } = first; //Fetchig data from usecontext
   const updateNote = (id, title, description, tag) => {
     setNote({ id: id, title: title, description: description, tag: tag })
     console.log(note.id)
@@ -26,7 +26,7 @@ export default function Home() {
       body: JSON.stringify({ title: title, description: description, tag: tag }),
       headers: {
         'content-Type': 'application/json',
-        'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38",
+        'auth-tocken': loginJwt,
       }
     })
     console.log(response.json());

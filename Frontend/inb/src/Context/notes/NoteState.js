@@ -12,7 +12,7 @@ function NoteState(props) {
       method: 'GET',
       headers: {
         'contentType': 'application/json',
-        'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38",
+        'auth-tocken': loginJwt,
       },
     })
     const newjson = await response.json()
@@ -32,7 +32,7 @@ function NoteState(props) {
       method: 'DELETE',
       headers: {
         'contentType': 'application/json',
-        'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY1NzQzNDA0MH0.RwWyPTRKKFShEQZ-m_BpKxHeVzUlceeQko892mRVHy4",
+        'auth-tocken': loginJwt,
       },
     })
     console.log(response)

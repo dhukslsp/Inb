@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-
+import React, { useState,useContext } from 'react'
+import notecontext from '../Context/notes/noteContext';
 function AddA() {
     const [note, setNote] = useState({ title: "", description: "", tag: "" });
+    const first = useContext(notecontext);
+    const {loginJwt} = first;
     const addnote = async (title, description, tag) => {
         // this will update entries with PUT
         const url = `http://localhost:3012/api/notes/addnote`
@@ -11,7 +13,7 @@ function AddA() {
             body: JSON.stringify({ title: title, description: description, tag: tag }),
             headers: {
                 'content-Type': 'application/json',
-                'auth-tocken': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjOWM1NGY0ZjA2NDM5Y2M5ODVkOGZjIn0sImlhdCI6MTY2MDQ3MTUyMX0.O6UnNXQ2vTBPE0o0FRvd5HEhqx70kOQMImTtcO68T38"
+                'auth-tocken': loginJwt
             }
         })
         console.log(response)
