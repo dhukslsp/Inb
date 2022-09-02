@@ -16,6 +16,7 @@ function Login() {
 		if (response.ok) {
 			const newjson = await response.json();
 			localStorage.setItem("tocken",newjson.jwtData);// Settinbg jwt data
+			alert("Login Sucess Kindly Refresh");
 			myredirect("/");
 		}
 		else {

@@ -1,7 +1,11 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
-import NoteState from '../Context/notes/NoteState';
 function Navbar() {
+  const isLoggedIn = localStorage.getItem("tocken")!=null ? true:false;
+  const  logout = () =>{
+    localStorage.clear();
+    alert("You have Been sucessfully logged out from the website kindly log in to continue");
+  }
     return (
         <nav className="navbar navbar-expand-lg bg-light font-extrabold">
         <div className="container-fluid">
@@ -14,10 +18,10 @@ function Navbar() {
               <li className="nav-item">
                 <Link className="nav-link" to="/About">About</Link>
               </li>
-            </ul>
-            <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/login">Login</Link></button>
-            <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/signup">Sign Up</Link></button>
-            <button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/signup">Sign Out</Link></button>
+            </ul>{
+            isLoggedIn
+        ? <button   className="btn btn-outline-success m-1" type="submit" onClick={logout}>Sign Out</button>
+        : <div><button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/login">Login</Link></button><button className="btn btn-outline-success m-1" type="submit"><Link className="nav-link" to="/signup">Sign Up</Link></button></div>}
           </div>
         </div>
       </nav>
