@@ -2,9 +2,11 @@ import React from 'react'
 import { Link } from "react-router-dom";
 function Navbar() {
   const isLoggedIn = localStorage.getItem("tocken")!=null ? true:false;
+  console.log(isLoggedIn);
   const  logout = () =>{
     localStorage.clear();
-    alert("You have Been sucessfully logged out from the website kindly log in to continue");
+    console.log(isLoggedIn);
+    window.location.reload();
   }
     return (
         <nav className="navbar navbar-expand-lg bg-light font-extrabold">
