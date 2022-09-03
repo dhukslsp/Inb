@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 function Login() {
 	var myredirect = useNavigate();
 	const [mystate, changestate] = useState("");
@@ -50,6 +51,7 @@ function Login() {
 				}
 				}>Login</button>
 			</div>
+			<p>Currently new to our Inb website <Link to="/signup"> sign up for free </Link></p>
 		</div>
 	)
 }

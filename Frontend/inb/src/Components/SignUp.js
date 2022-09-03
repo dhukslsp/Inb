@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { Link } from "react-router-dom";
 function SignUp() {
 	const [credentials, setcredentials] = useState("");
 	const signuprequest = async (name, Email, password) => {
@@ -43,14 +43,15 @@ function SignUp() {
 						<input type="password" name="password" onChange={onchangehandler1} value={credentials.password} placeholder='Your Passwoord' class="form-control" id="inputPassword" />
 					</div>
 				</div>
-			</div>
-			<button className="btn btn-outline-success float-right mx-11" type="submit" onClick={() => {
-				if (typeof (credentials.name) == "string") { signuprequest(credentials.name, credentials.email, credentials.password) }
-				else {
-					signuprequest(credentials.name[0], credentials.Email[0], credentials.password[0])
+				<button className="btn btn-outline-success float-right mx-11" type="submit" onClick={() => {
+					if (typeof (credentials.name) == "string") { signuprequest(credentials.name, credentials.email, credentials.password) }
+					else {
+						signuprequest(credentials.name[0], credentials.Email[0], credentials.password[0])
+					}
 				}
-			}
-			}>Login</button>
+				}>Login</button>
+				<p>Existing user <Link to="/login"> Login to Continue </Link></p>
+			</div>
 		</div>)
 }
 
