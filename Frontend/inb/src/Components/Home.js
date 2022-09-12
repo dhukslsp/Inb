@@ -31,6 +31,19 @@ export default function Home() {
     })
     console.log(response.json());
   }
+  function searchhome(){
+    let input = document.getElementById('searchinggBar').value; //Getting the element by value form the make
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName('searchBar');
+    for (let i = 0; i < x.length; i++) { 
+      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+          x[i].style.display="none";
+      }
+      else {
+          x[i].style.display="inline-flex";                 
+      }
+  }
+  }
   //Function for saving teh changes in the library
   const ref = useRef();
   const clickref = useRef();
@@ -95,7 +108,23 @@ export default function Home() {
         </div>
       </div>
       <div className='p-10' style={{ "paddingTop": "0px" }}>
-        <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Your All Notes</p>
+      <input type="search" className='
+      form-control
+      block
+      w-full
+      px-3
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+      ' name="searchbar" id="searchinggBar" onChange={searchhome} placeholder="Search your notes"/>
+        <p className='text-xl font-extrabold my-4'>Your All Notes</p>
         {mynote.length === 0 && <h2>No Notes to display</h2>}
         {mynote.map((note) => { return <NoteCard update={updateNote} tag={note.tag} id={note._id} title={note.title} key={note._id} mydesc={note.description} /> })}
       </div>
