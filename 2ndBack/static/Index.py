@@ -1,18 +1,25 @@
 from flask import Flask , request
-from Encrypt import decrypt_message,Encrypting_Meage
+from cryptography.fernet import Fernet
 import mysql.connector
-from NestedNote import run
 app = Flask(__name__)
 # making the function to
-
+key = b'PCHl_MjGyEyBxLYha3S-cWg_SDDmjT4YYaKYh4Z7Yug='
 @app.route("/api/auth/Fetch_User",methods=["GET"])
 def fetchuser():
     json = request.json
     email = json["email"]
     mycursor.execute(f'select Email from myUsers where Email = "{email}"')
-    a = mycursor.fetchall()[0][0]
+    c = mycursor.fetchall()
+    if c == []: return "Not Found"
+    a = c[0][0 ]
     if a == json["email"]:
-        return a
+        mycursor.execute(f'select password from myUsers where Email = "{a}"')
+        b = mycursor.fetchall()[0][0]
+        f = Fernet(key)
+        if json["password"] ==  f.decrypt(b).decode("utf8"):
+            return "True"
+        else:
+            return "False"
     else:
         return "Email Not Found"
 
@@ -30,7 +37,9 @@ def route():
         else:
             name = json['name']
             email = json['email']
-            password = Encrypting_Meage(json['password'])
+            f = Fernet(key)
+            encrypted_Message = f.encrypt(json['password'].encode())
+            password = encrypted_Message.decode()
             sql = f'INSERT INTO myUsers (name, Email,password) VALUES ("{name}","{email}","{password}")'
             mycursor.execute(sql)
             mydb.commit()
