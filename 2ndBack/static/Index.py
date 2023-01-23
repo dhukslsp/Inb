@@ -6,6 +6,7 @@ app = Flask(__name__)
 key = b'PCHl_MjGyEyBxLYha3S-cWg_SDDmjT4YYaKYh4Z7Yug='
 @app.route("/api/auth/Fetch_User",methods=["GET"])
 def fetchuser():
+    mydb.commit()
     json = request.json
     email = json["email"]
     mycursor.execute(f'select Email from myUsers where Email = "{email}"')
@@ -37,13 +38,16 @@ def route():
         else:
             name = json['name']
             email = json['email']
-            f = Fernet(key)
-            encrypted_Message = f.encrypt(json['password'].encode())
-            password = encrypted_Message.decode()
-            sql = f'INSERT INTO myUsers (name, Email,password) VALUES ("{name}","{email}","{password}")'
-            mycursor.execute(sql)
-            mydb.commit()
-            return "User Details Stored"
+            if len(json["password"])>12:
+                return "Password length can't be grater than 12 characters"  
+            else:  
+                f = Fernet(key)
+                encrypted_Message = f.encrypt(json['password'].encode())
+                password = encrypted_Message.decode()
+                sql = f'INSERT INTO myUsers (name, Email,password) VALUES ("{name}","{email}","{password}")'
+                mycursor.execute(sql)
+                mydb.commit()
+                return "User Details Stored", 200
     else:
         return "Invalid Request Kindly Check"
 
