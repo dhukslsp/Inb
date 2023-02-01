@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/User");
+const User = require("../models/user");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
@@ -9,35 +9,23 @@ const jutsecret = "Harryisagoodb$dy";
 // create a user using POST api/auth dosent require auth
 router.post('/Create_User',async (req, res) => {
         // check weather the user with the same e mail exists already
-        let user = await User.findOne({ email: req.body.email });
-        if (user) {
-            res.status(400).json({ error: "Sorry there already exists a user with the same e mail" });
-        }
-        else{
+        
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(req.body.password, salt);
-        user = await User.create({
+        let user = await User.create({
             name: req.body.name,
             email: req.body.email,
             password: secPass
         })
+        
         const data = {
             user: {
                 id: user.id
             }
         }
         const jwtData = jwt.sign(data, jutsecret)
-        res.json({ jwtData });}
+        res.json({ jwtData });
     });
-//    const data = await new User({
-//     name: req.body.name,
-//     email: req.body.email,
-//     password: req.body.password
-//    })
-
-//    data.save().then(res.send(req.body)).catch(res.send(error));
-//    res.send(data.json());
-//Authenticate a user no login required
 // This thing authenticate the user with post/API/Auth/Login
 router.post('/Login',
     body('email', 'Enter a valid email').isEmail(),

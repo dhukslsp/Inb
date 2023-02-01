@@ -1,6 +1,7 @@
 from flask import Flask , request
 from cryptography.fernet import Fernet
 import mysql.connector
+from rotu import *
 app = Flask(__name__)
 # making the function to
 key = b'PCHl_MjGyEyBxLYha3S-cWg_SDDmjT4YYaKYh4Z7Yug='
@@ -12,7 +13,7 @@ def fetchuser():
     mycursor.execute(f'select Email from myUsers where Email = "{email}"')
     c = mycursor.fetchall()
     if c == []: return "Not Found"
-    a = c[0][0 ]
+    a = c[0][0]
     if a == json["email"]:
         mycursor.execute(f'select password from myUsers where Email = "{a}"')
         b = mycursor.fetchall()[0][0]
@@ -23,6 +24,7 @@ def fetchuser():
             return "False"
     else:
         return "Email Not Found"
+
 
 
 @app.route('/api/auth/Create_User', methods=['POST'])
@@ -50,6 +52,7 @@ def route():
                 return "User Details Stored", 200
     else:
         return "Invalid Request Kindly Check"
+
 
 
 if __name__ == '__main__':
