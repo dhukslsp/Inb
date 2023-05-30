@@ -1,6 +1,6 @@
 // here the data of teh database will be stored
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://127.0.0.1:27017/imb"
+const mongoURI = "mongodb+srv://dhruv:mypwd@cluster0.uu8x4j9.mongodb.net/clust"
 const connectToMongo = () =>{
     mongoose.set("strictQuery", false);
     mongoose.connect(mongoURI,
