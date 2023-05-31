@@ -5,14 +5,14 @@ const cors = require("cors");
 const path = require("path")
 connectToMongo();
 const app = express()
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 5050 ;
 //available eutes
 
 app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 app.get('/', (req, res) => {
-  res.send("hello world")
+  res.sendFile(__dirname+"/build/index.html")
   
 });
 app.get('/test',(req,res)=>{

@@ -5,7 +5,7 @@ function Login() {
 	var myredirect = useNavigate();
 	const [mystate, changestate] = useState("");
 	const loginrequest = async (Email, password) => {
-		const url = 'http://localhost:3012/api/auth/Login';
+		const url = 'https://inb.vercel.app/api/auth/Login';
 		const response = await fetch(url, {
 			method: 'post',
 			mode: 'cors',

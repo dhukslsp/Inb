@@ -6,7 +6,7 @@ function AddA() {
     const {loginJwt} = first;
     const addnote = async (title, description, tag) => {
         // this will update entries with PUT
-        const url = `http://localhost:3012/api/notes/addnote`
+        const url = `https://inb.vercel.app/api/notes/addnote`
         const response = await fetch(url, {
             method: "post",
             mode: 'cors',

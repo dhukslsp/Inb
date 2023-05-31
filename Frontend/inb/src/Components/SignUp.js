@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function SignUp() {
 	const [credentials, setcredentials] = useState("");
 	const signuprequest = async (name, Email, password) => {
-		const url = 'http://localhost:3012/api/auth/Create_User';
+		const url = 'https://inb.vercel.app/api/auth/Create_User';
 		const response = await fetch(url, {
 			method: 'post',
 			mode: 'cors',

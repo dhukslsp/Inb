@@ -19,7 +19,7 @@ export default function Home() {
   }
   const editnote = async (id, title, description, tag) => {
     console.log(title);
-    const url = 'http://localhost:3012/api/notes/updatenote/' + id;
+    const url = 'https://inb.vercel.app/api/notes/updatenote/' + id;
     const response = await fetch(url, {
       method: 'put',
       mode: 'cors',
