@@ -13,7 +13,7 @@ app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + "/build/index.html");
+  res.send("hello world")
   
 });
 app.get('/test',(req,res)=>{
