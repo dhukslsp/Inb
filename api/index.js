@@ -2,11 +2,10 @@
 const express = require('express');
 const connectToMongo = require("./db");
 const cors = require("cors");
-require('dotenv').config();
 const path = require("path")
 connectToMongo();
 const app = express()
-const port = process.env.PORT;
+const port = process.env.PORT || 5050;
 //available eutes
 
 app.use(express.static("build"));
