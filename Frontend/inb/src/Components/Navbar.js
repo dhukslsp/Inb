@@ -12,7 +12,6 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg bg-light font-extrabold">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">Navbar</a>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
@@ -20,15 +19,12 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/About">About</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/Note_Only">Note Only</Link>
-            </li>
-          </ul>{
+          </ul>
+          {
             isLoggedIn ? <button className="btn btn-outline-success m-1" type="submit" onClick={logout}>Sign Out</button> :
             <div></div>
           }
         </div>
-      </div>
     </nav>
   )
 }
