@@ -125,7 +125,7 @@ export default function Home() {
       m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       ' name="searchbar" id="searchinggBar" onChange={searchhome} placeholder="Search your notes" />
-        <p className='text-xl font-extrabold my-4 '>Your All Notes</p>
+        <p className='text-xl font-extrabold my-4 '>Your All1 Notes</p>
         {loader ? <Loader /> :mynote.length === 0 && <h2>No Notes to display</h2>}
         {}
         {mynote.map((note) => { return <NoteCard update={updateNote} tag={note.tag} id={note._id} title={note.title} key={note._id} mydesc={note.description} /> })}
