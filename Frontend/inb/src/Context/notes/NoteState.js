@@ -4,10 +4,11 @@ function NoteState(props) {
   const host = "https://inb.vercel.app"
   const notestate = []
   const [mynote, setnotes] = useState(notestate);
-
+  const [loader, setloader] = useState(false)
   var loginJwt = localStorage.getItem("tocken");
   //  get All Notes
   const fetchallnotes = async () => {
+    setloader(true)
     const response = await fetch(`${host}/api/notes/Fetchallnotes`, {
       method: 'GET',
       headers: {
@@ -16,6 +17,7 @@ function NoteState(props) {
       },
     })
     const newjson = await response.json()
+    setloader(false)
     setnotes(newjson);
     //Logic for editing for the client
   }
@@ -38,7 +40,7 @@ function NoteState(props) {
     console.log(response)
   }
   return (
-    <Notecontext.Provider value={{ fetchallnotes, mynote, setnotes, deleteNote,loginJwt }}>
+    <Notecontext.Provider value={{ fetchallnotes, mynote, setnotes, deleteNote, loginJwt,loader }}>
       {props.children}
     </Notecontext.Provider>
   )

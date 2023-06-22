@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import notecontext from '../Context/notes/noteContext'
 import NoteCard from './NoteCard';
 import AddA from './AddA';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Loader from './Loader';
 export default function Home() {
+
   let history = useNavigate();
   const [note, setNote] = useState({ id: "", title: "", description: "", tag: "" });
   //Onchanging of the update note textbox
@@ -11,7 +13,7 @@ export default function Home() {
     setNote({ ...note, [e.target.name]: [e.target.value] })
   }
   const first = useContext(notecontext)
-  const { fetchallnotes, mynote,loginJwt } = first; //Fetchig data from usecontext
+  const { fetchallnotes, mynote, loginJwt, loader } = first; //Fetchig data from usecontext
   const updateNote = (id, title, description, tag) => {
     setNote({ id: id, title: title, description: description, tag: tag })
     console.log(note.id)
@@ -31,31 +33,31 @@ export default function Home() {
     })
     console.log(response.json());
   }
-  function searchhome(){
+  function searchhome() {
     let input = document.getElementById('searchinggBar').value; //Getting the element by value form the make
     input = input.toLowerCase();
     let x = document.getElementsByClassName('searchBar');
-    for (let i = 0; i < x.length; i++) { 
+    for (let i = 0; i < x.length; i++) {
       if (!x[i].innerHTML.toLowerCase().includes(input)) {
-          x[i].style.display="none";
+        x[i].style.display = "none";
       }
       else {
-          x[i].style.display="inline-flex";                 
+        x[i].style.display = "inline-flex";
       }
-  }
+    }
   }
   //Function for saving teh changes in the library
   const ref = useRef();
   const clickref = useRef();
   const closeRef = useRef();
   useEffect(() => {
-    if(localStorage.getItem("tocken")){
+    if (localStorage.getItem("tocken")) {
       fetchallnotes();
     }
-    else{
+    else {
       history("/login");
     }
-  })
+  }, [])
 
   return (
     <div>
@@ -76,15 +78,15 @@ export default function Home() {
                 <p className='text-xl font-extrabold' style={{ marginBottom: "2pc" }}>Create a New Note</p>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Title</label>
-                  <input type="text" name="title" className="form-control" ref={clickref} value={note.title} onChange={onchangehandler1} id="title"/>
+                  <input type="text" name="title" className="form-control" ref={clickref} value={note.title} onChange={onchangehandler1} id="title" />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Tag</label>
-                  <input type="text" name="tag" className="form-control" value={note.tag} onChange={onchangehandler1} id="tag"/>
+                  <input type="text" name="tag" className="form-control" value={note.tag} onChange={onchangehandler1} id="tag" />
                 </div>
                 <div className="mb-3">
                   <label htmFor='desc' htmlFor="exampleFormControlTextarea1" className="desc">Example textarea</label>
-                  <textarea className="form-control" name="description" value={note.description} id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3"/>
+                  <textarea className="form-control" name="description" value={note.description} id="exampleFormControlTextarea1" onChange={onchangehandler1} rows="3" />
                 </div>
               </div>
             </div>
@@ -108,7 +110,7 @@ export default function Home() {
         </div>
       </div>
       <div className='p-10' style={{ "paddingTop": "0px" }}>
-      <input type="search" className='
+        <input type="search" className='
       form-control
       block
       px-3
@@ -122,9 +124,10 @@ export default function Home() {
       ease-in-out
       m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      ' name="searchbar" id="searchinggBar" onChange={searchhome} placeholder="Search your notes"/>
-      <p className='text-xl font-extrabold my-4 '>Your All Notes</p>
-        {mynote.length === 0 && <h2>No Notes to display</h2>}
+      ' name="searchbar" id="searchinggBar" onChange={searchhome} placeholder="Search your notes" />
+        <p className='text-xl font-extrabold my-4 '>Your All Notes</p>
+        {loader ? <Loader /> :mynote.length === 0 && <h2>No Notes to display</h2>}
+        {}
         {mynote.map((note) => { return <NoteCard update={updateNote} tag={note.tag} id={note._id} title={note.title} key={note._id} mydesc={note.description} /> })}
       </div>
     </div>
