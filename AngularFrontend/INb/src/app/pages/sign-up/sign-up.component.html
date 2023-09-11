@@ -1,0 +1,26 @@
+<form class="logindiv">
+    <h3 style="margin-bottom: 2pc;" *ngIf="!cpwdvalidate">Sign Up for creating your New Ac</h3>
+    <h3 *ngIf = "cpwdvalidate" style = "color:red;margin-bottom: 1pc;">Please Check That the passwords are matching or not ?</h3>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">A.</span>
+        <input type="Email" class="form-control" name = "name"  placeholder="Name" aria-label="Name" [formControl]="name"
+            aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input type="Email" class="form-control" name = "Email" placeholder="Email" aria-label="Email" [formControl]="Email"
+            aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">**</span>
+        <input type="password" class="form-control" name = "Password" placeholder="Password" aria-label="Password"  [formControl]="Password"
+            aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3" [ngClass]="{'errorconfirm': cpwdvalidate}">
+        <span class="input-group-text" id="basic-addon1">**</span>
+        <input type="password" class="form-control" name = "Cpassword"  placeholder="Confirm Pasword" aria-label="Confirm Password" [formControl]="Confirmpasswd" (change)="cpassword($event)"
+            aria-describedby="basic-addon1">
+        </div>
+        
+    <button type="submit" class="btn btn-outline-primary" id="primapybut">SignUp / Create Account</button>
+</form>

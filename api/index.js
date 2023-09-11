@@ -12,8 +12,7 @@ app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 app.get('/', (req, res) => {
-  res.sendFile(__dirname+"/build/index.html")
-  
+  res.sendFile(__dirname+"/build/index.html")  
 });
 app.get('/test',(req,res)=>{
   res.send("Working correctly");
