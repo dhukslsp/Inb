@@ -11,6 +11,7 @@ export class SignUpComponent {
   Password = new FormControl('');
   Confirmpasswd = new FormControl('');
   cpwdvalidate:boolean = false;
+  apiconnection:boolean = false;
   cpassword(event:any){
     if(this.Password.value != this.Confirmpasswd.value){
       this.cpwdvalidate = true;
@@ -18,7 +19,38 @@ export class SignUpComponent {
       this.cpwdvalidate = false;
     }
   }
-  onSubmit(result:any){
-    console.log("You have entered : " + result.Name); 
+  onSubmit(){
+    if(!this.cpwdvalidate){
+
+    }
+    console.log("called");
+    fetch('http://localhost:5050/api/auth/Create_User', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.name.value,
+        email: this.Email.value,
+        password: this.Password.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+      
+    })
+    .then(response => {
+      if(response.ok){
+        alert("User Created Sucessfully");
+      }
+      else{
+        alert("USer not created sucessfully");
+      }
+      return response.json()
+      
+    })
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+      this.apiconnection = true;
+    });
+    
   }
 }

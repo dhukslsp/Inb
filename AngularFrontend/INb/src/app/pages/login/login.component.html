@@ -1,15 +1,16 @@
 <div class = "logindiv">
-    <h3 style = "margin-bottom: 2pc;">Login For Acessing your notes</h3>
+    <h3 style = "margin-bottom: 2pc;" *ngIf = "!validation">Login For Acessing your notes</h3>
+    <h3 *ngIf = "validation" style = "color:red;margin-bottom: 1pc;">There is some mistake in the form</h3>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">@</span>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" [formControl]="username"
             aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">**</span>
-        <input type="text" class="form-control" placeholder="Password" aria-label="Password"
+        <input type="text" class="form-control" placeholder="Password" aria-label="Password" [formControl]="password"
             aria-describedby="basic-addon1">
         </div>
         <p>No made an account yet ? Sign Up to Continue</p>
-        <button type="button" class="btn btn-outline-primary" id = "primapybut">Login</button>
+        <button type="button" class="btn btn-outline-primary" id = "primapybut" (click)="onLogin()">Login</button>
 </div>

@@ -1,6 +1,7 @@
 <form class="logindiv">
-    <h3 style="margin-bottom: 2pc;" *ngIf="!cpwdvalidate">Sign Up for creating your New Ac</h3>
+    <h3 style="margin-bottom: 2pc;" *ngIf="(!cpwdvalidate)">Sign Up for creating your New Ac</h3>
     <h3 *ngIf = "cpwdvalidate" style = "color:red;margin-bottom: 1pc;">Please Check That the passwords are matching or not ?</h3>
+    <h3 *ngIf = "apiconnection" style = "color:red;margin-bottom: 1pc;">Connection to api is not available at this moment.</h3>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">A.</span>
         <input type="Email" class="form-control" name = "name"  placeholder="Name" aria-label="Name" [formControl]="name"
@@ -22,5 +23,5 @@
             aria-describedby="basic-addon1">
         </div>
         
-    <button type="submit" class="btn btn-outline-primary" id="primapybut">SignUp / Create Account</button>
+    <button type="submit" class="btn btn-outline-primary" id="primapybut" (click)="onSubmit()">SignUp / Create Account</button>
 </form>
